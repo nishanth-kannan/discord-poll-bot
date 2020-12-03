@@ -3,7 +3,11 @@ console.log('Setting it up...')
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const {prefix, token, command_channel, target_channel} = require("./config.json");
+const prefix = ";";
+//const {token, command_channel, target_channel} = require("./config.json");
+const token = process.env.BOT_TOKEN;
+const command_channel = process.env.BOT_COMMAND_CHANNEL;
+const target_channel = process.env.BOT_TARGET_CHANNEL;
 
 client.login(token);
 
