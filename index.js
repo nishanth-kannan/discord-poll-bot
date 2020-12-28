@@ -4,10 +4,12 @@ console.log('Setting it up...')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = ";";
-//const {token, command_channel, target_channel} = require("./config.json");
-const token = process.env.BOT_TOKEN;
-const command_channel = process.env.BOT_COMMAND_CHANNEL;
-const target_channel = process.env.BOT_TARGET_CHANNEL;
+const {token} = require("./config.json");
+// const token = process.env.BOT_TOKEN;
+// const command_channel = process.env.BOT_COMMAND_CHANNEL;
+// const target_channel = process.env.BOT_TARGET_CHANNEL;
+const command_channel = "meme-submissions";
+const target_channel = "submission-results";
 
 client.login(token);
 
@@ -19,7 +21,7 @@ client.on('ready', () =>{
 client.on('message', gotMessage);
 
  async function gotMessage(msg){  //async
-    if (!msg.channel.id === command_channel || !msg.content.startsWith(prefix) || msg.author.bot){
+    if (!(msg.channel.name === command_channel) || !msg.content.startsWith(prefix) || msg.author.bot){
         return;
     }
 
@@ -28,7 +30,7 @@ client.on('message', gotMessage);
 
     if (command === 'submit'){
         //console.log(msg); //to see info of EVERY MESSAGE SENT in that channel
-        const channel_bot = await client.channels.cache.get(target_channel); //await
+        const channel_bot = await msg.guild.channels.cache.find(ch => ch.name === target_channel);//this is probably where the problem is //await
         var poll_duration = 1; //change the duration of the poll here
 
         if (!msg.content){ 
@@ -36,7 +38,7 @@ client.on('message', gotMessage);
         }
 
         if (msg.attachments.array().length == '0'){ //replies to user when there is no image attached to the message
-            return msg.reply(`Oops!\nWhere is the meme?`); 
+            return msg.reply(`bruh\nWhere is the meme?`); 
         }
         
         //all the emoji reactions for the poll; More can be added 
@@ -70,7 +72,7 @@ client.on('message', gotMessage);
                 //         console.log(reaction.users);
                 //     } else if (reaction.emoji.name === '💛'){
                 //         yellowHeart++;
-                //         console.log(reaction.users);
+                //         console.log(reaction.users); 
                 //     } else if (reaction.emoji.name === '🖤'){
                 //         blackHeart++;
                 //         console.log(reaction.users);
