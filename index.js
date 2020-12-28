@@ -4,8 +4,8 @@ console.log('Setting it up...')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = ";";
-const {token} = require("./config.json");
-// const token = process.env.BOT_TOKEN;
+// const {token} = require("./config.json");
+const token = process.env.BOT_TOKEN;
 // const command_channel = process.env.BOT_COMMAND_CHANNEL;
 // const target_channel = process.env.BOT_TARGET_CHANNEL;
 const command_channel = "meme-submissions";
@@ -79,7 +79,7 @@ client.on('message', gotMessage);
                 //     }
                 //     return (reaction.emoji.name === '❤' || reaction.emoji.name === '💛' || reaction.emoji.name === '🖤'); 
                 // };
-
+                
                 let vote_result = ""; //Decision made by the bot
                 let votes = []; //number of votes for each category
                 let uniqueUsersList = new Set();
