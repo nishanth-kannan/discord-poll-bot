@@ -31,7 +31,7 @@ client.on('message', gotMessage);
     if (command === 'submit'){
         //console.log(msg); //to see info of EVERY MESSAGE SENT in that channel
         const channel_bot = await msg.guild.channels.cache.find(ch => ch.name === target_channel);//this is probably where the problem is //await
-        var poll_duration = 1; //change the duration of the poll here
+        var poll_duration = 10; //change the duration of the poll here
 
         if (!msg.content){ 
             return;
@@ -47,7 +47,7 @@ client.on('message', gotMessage);
         //checks is message has an attachment(image) and stores that attachment in the variable
         let msgAttachment = msg.attachments.size > 0 ? msg.attachments.array()[0].url : null; 
         if (msgAttachment){ //sends embed in a separate channel for voting purposes 
-            msg.reply('Thank you for your submission. Your pp will now be measured by the mods.');
+            msg.reply('Thank you for your submission. The fate of your meme will now be decided by the council!');
             let embed = new Discord.MessageEmbed()
                 .setColor('#6600FF')
                 .setTitle('Time to Vote Bois')
