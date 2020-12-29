@@ -11,7 +11,7 @@ const token = process.env.BOT_TOKEN;
 const command_channel = "meme-submissions";
 const target_channel = "submission-results";
 
-const validFileTypes = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
+const validFileTypes = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm", ".mov"];
 
 client.login(token);
 
