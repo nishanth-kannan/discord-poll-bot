@@ -11,6 +11,8 @@ const token = process.env.BOT_TOKEN;
 const command_channel = "meme-submissions";
 const target_channel = "submission-results";
 
+const validFileTypes = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm", ".mov"];
+
 client.login(token);
 
 client.on('ready', () =>{
@@ -20,7 +22,7 @@ client.on('ready', () =>{
 
 client.on('message', gotMessage);
 
- async function gotMessage(msg){  //async
+async function gotMessage(msg){  //async
     if (!(msg.channel.name === command_channel) || !msg.content.startsWith(prefix) || msg.author.bot){
         return;
     }
@@ -45,7 +47,21 @@ client.on('message', gotMessage);
         const validEmojis = ['❤', '💛', '🖤'];
 
         //checks is message has an attachment(image) and stores that attachment in the variable
-        let msgAttachment = msg.attachments.size > 0 ? msg.attachments.array()[0].url : null; 
+        let msgAttachment = msg.attachments.size > 0 ? msg.attachments.array()[0].url : null;
+        
+        let isValidFile = false;
+        for (const fileType of validFileTypes) {
+            if (msgAttachment.endsWith(fileType)) { 
+                isValidFile = true;
+                break;
+            }
+        }
+
+        if (!isValidFile) { 
+            msg.reply("Unsupported file format.");
+            return;
+        }
+
         if (msgAttachment){ //sends embed in a separate channel for voting purposes 
             msg.reply('Thank you for your submission. The fate of your meme will now be decided by the council!');
             let embed = new Discord.MessageEmbed()
