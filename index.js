@@ -32,7 +32,7 @@ async function gotMessage(msg){  //async
 
     if (command === 'submit'){
         //console.log(msg); //to see info of EVERY MESSAGE SENT in that channel
-        const channel_bot = await msg.guild.channels.cache.find(ch => ch.name === target_channel);//this is probably where the problem is //await
+        const channel_bot = await msg.guild.channels.cache.find(ch => ch.name === target_channel);//await
         var poll_duration = 10; //change the duration of the poll here
 
         if (!msg.content){ 
@@ -48,6 +48,10 @@ async function gotMessage(msg){  //async
 
         //checks is message has an attachment(image) and stores that attachment in the variable
         let msgAttachment = msg.attachments.size > 0 ? msg.attachments.array()[0].url : null;
+
+        if (msg.attachments.array().length > '1'){ //replies to user when there are multiple files attached to the message
+            return msg.reply(`bruh\nOnly the first file has been accepted as a submission\nFor multiple submissions, please send them individually\nThanks for understanding Chad!`); 
+        }
         
         let isValidFile = false;
         for (const fileType of validFileTypes) {
@@ -58,7 +62,7 @@ async function gotMessage(msg){  //async
         }
 
         if (!isValidFile) { 
-            msg.reply("Unsupported file format.");
+            msg.reply(`bruh\nSubmit only Image or Video Files.`);
             return;
         }
 
