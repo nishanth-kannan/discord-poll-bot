@@ -50,7 +50,7 @@ async function gotMessage(msg){  //async
         let msgAttachment = msg.attachments.size > 0 ? msg.attachments.array()[0].url : null;
 
         if (msg.attachments.array().length > '1'){ //replies to user when there are multiple files attached to the message
-            return msg.reply(`bruh\nOnly the first file has been accepted as a submission\nFor multiple submissions, please send them individually\nThanks for understanding Chad!`); 
+            return msg.reply(`bruh\nThis submission is rendered invalid.\nFor multiple submissions, please send them individually.\nThanks for understanding, Chad!`); 
         }
         
         let isValidFile = false;
